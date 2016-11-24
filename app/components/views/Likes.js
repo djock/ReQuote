@@ -8,7 +8,7 @@ import {
   ExponentLinksView,
 } from '@exponent/samples';
 
-import Colors from '../constants/Colors';
+import Colors from '../../constants/Colors';
 export default class LinksScreen extends React.Component {
   static route = {
     navigationBar: {

@@ -16,8 +16,8 @@ import {
   FontAwesome,
 } from '@exponent/vector-icons';
 
-import Router from './navigation/Router';
-import cacheAssetsAsync from './utilities/cacheAssetsAsync';
+import Router from './app/routes/Router';
+import cacheAssetsAsync from './app/utils/cacheAssetsAsync';
 
 class AppContainer extends React.Component {
   state = {
@@ -32,11 +32,11 @@ class AppContainer extends React.Component {
     try {
       await cacheAssetsAsync({
         images: [
-          require('./assets/images/exponent-wordmark.png'),
+          require('./app/assets/images/exponent-wordmark.png'),
         ],
         fonts: [
           FontAwesome.font,
-          {'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf')},
+          {'space-mono': require('./app/assets/fonts/SpaceMono-Regular.ttf')},
         ],
       });
     } catch(e) {
