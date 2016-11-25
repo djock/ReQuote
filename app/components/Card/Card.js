@@ -5,27 +5,18 @@ import {
   Text
 } from 'react-native';
 import {Foundation} from '@exponent/vector-icons';
-import Colors from '../constants/Colors';
+import Colors from '../../constants/Colors';
+import Menu from './Menu';
 
 export default class Card extends React.Component {
-  render() {
+    render() {
         return (
             <View style={styles.card}>
                 <Text style={styles.quoteText}>{this.props.quote}</Text>
                 <Text style={styles.quoteAuthor}>― {this.props.author}</Text>
-                <Text style={styles.quoteCategory}>Category: {this.props.category}</Text>
+                <Menu localQuoteCategory={this.props.category}/>
             </View>
         )
-    }
-
-    _renderIcon(name, isSelected) {
-        return (<Foundation name = {
-                name
-            }
-            size = {
-                24
-            }
-            color = { isSelected ? Colors.tabIconSelected : Colors.tabIconDefaul}/>);
     }
 }
 
@@ -34,7 +25,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: 300,
-        minHeight: 300,
         backgroundColor: Colors.mainColorAlfa,
         borderRadius: 5,
         borderWidth: 2,
@@ -61,17 +51,11 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         marginRight: 10,
         alignSelf: 'flex-end',
-    },
-    quoteCategory: {
-        alignSelf: 'flex-end',
-        fontSize: 8,
-        marginTop: 15,
-        marginRight: 10,
-        color: 'lightcyan'
+        flexGrow: 1,
+        paddingBottom: 20
     },
     actionButton: {
-        alignSelf: 'flex-end',
         borderColor: Colors.cardColor,
         borderWidth: 2
-    }
+    },
 });

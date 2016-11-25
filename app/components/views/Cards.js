@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 
 import SwipeCards from 'react-native-swipe-cards';
-import Card from '../Card';
+import Card from '../Card/Card';
 
 import quotesJSON from '../../constants/Quotes.json';
 import Colors from '../../constants/Colors';
