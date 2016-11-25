@@ -6,7 +6,6 @@ import {
 } from 'react-native';
 import {Foundation} from '@exponent/vector-icons';
 import Colors from '../constants/Colors';
-import {Button, Icon } from 'native-base';
 
 export default class Card extends React.Component {
   render() {
@@ -15,12 +14,6 @@ export default class Card extends React.Component {
                 <Text style={styles.quoteText}>{this.props.quote}</Text>
                 <Text style={styles.quoteAuthor}>― {this.props.author}</Text>
                 <Text style={styles.quoteCategory}>Category: {this.props.category}</Text>
-                <Button style={styles.actionButton} transparent>
-                   <Icon name="anchor" />
-                </Button> 
-                <Button style={styles.actionButton} transparent>
-                   <Icon name="anchor" />
-                </Button> 
             </View>
         )
     }
