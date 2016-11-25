@@ -23,15 +23,6 @@ export default class RootNavigation extends React.Component {
                     {isSelected => this._renderIcon('anchor', isSelected)}>
                     <StackNavigation initialRoute="likes"/>
                 </TabNavigationItem>
-
-                <TabNavigationItem
-                    id="test"
-                    renderIcon=
-                    {isSelected => this._renderIcon('alert', isSelected)}>
-                    <StackNavigation initialRoute="test"/>
-                </TabNavigationItem>
-
-
             </TabNavigation>
         );
     }

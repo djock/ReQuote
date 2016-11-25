@@ -15,7 +15,6 @@
     "@exponent/samples": "~1.0.2",
     "@exponent/vector-icons": "~2.0.3",
     "exponent": "~11.0.2",
-    "native-base": "^0.5.15",
     "react": "~15.3.2",
     "react-native": "git+https://github.com/exponentjs/react-native#sdk-11.0.3",
     "react-native-swipe-cards": "0.0.9"

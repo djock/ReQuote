@@ -1,6 +1,6 @@
 {
   "name": "ReQuote",
-  "description": "Quotes application",
+  "description": "Quotes browser application",
   "slug": "requote",
   "sdkVersion": "11.0.0",
   "version": "1.0.0",
