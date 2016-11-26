@@ -6,19 +6,20 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-import {Foundation} from '@exponent/vector-icons';
+import {FontAwesome} from '@exponent/vector-icons';
 import Colors from '../../constants/Colors';
 
 export default class Button extends React.Component {
     render() {
         return (
             <TouchableHighlight style={styles.button} underlayColor='transparent' onPress={() => this._handleTouch(this.props.quoteId)} >
-                <Foundation style={styles.icon} name="heart" size={24} />
+                <FontAwesome style={styles.icon} name="heart" size={20} />
             </TouchableHighlight>
         )
     }
 
     _handleTouch(quoteId) {
+        
         console.log("Quote ID: " + quoteId);
     }
 }
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
         color: Colors.likeColor
     },
     button: {
-        width: 70,
+        width: 60,
         height:40,
         alignSelf: 'flex-end',
     }

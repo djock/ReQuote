@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {StackNavigation, TabNavigation, TabNavigationItem} from '@exponent/ex-navigation';
-import {Foundation} from '@exponent/vector-icons';
+import {FontAwesome} from '@exponent/vector-icons';
 
 import Alerts from '../constants/Alerts';
 import Colors from '../constants/Colors';
@@ -9,7 +9,7 @@ import Colors from '../constants/Colors';
 export default class RootNavigation extends React.Component {
     render() {
         return (
-            <TabNavigation tabBarColor={Colors.mainColor}style={styles.navbar} tabBarHeight={45} initialTab="home">
+            <TabNavigation tabBarColor={Colors.backgroundColor} tabBarHeight={45} initialTab="home">
                 <TabNavigationItem
                     id="home"
                     renderIcon=
@@ -20,21 +20,19 @@ export default class RootNavigation extends React.Component {
                 <TabNavigationItem
                     id="links"
                     renderIcon=
-                    {isSelected => this._renderIcon('heart', isSelected)}>
+                    {isSelected => this._renderIcon('heart', isSelected, true)}>
                     <StackNavigation initialRoute="likes"/>
                 </TabNavigationItem>
             </TabNavigation>
         );
     }
 
-    _renderIcon(name, isSelected) {
-        return (<Foundation name = {
-            name
-        }
-        size = {
-            24
-        }
-        color = { isSelected ? Colors.tabIconSelected : Colors.tabIconDefault}/>);
+    _renderIcon(name, isSelected, isLikeMenu = false) {
+        return (
+            <FontAwesome name = { name }
+                size = { isLikeMenu ? 23 : 27 }
+                color = { isSelected ?  ( isLikeMenu ? Colors.likeColor : Colors.tabIconSelected) : Colors.tabIconDefault}
+            />);
     }
 }
 

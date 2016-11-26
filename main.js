@@ -15,6 +15,7 @@ import {
 import {
   FontAwesome,
 } from '@exponent/vector-icons';
+import Colors from './app/constants/Colors';
 
 import Router from './app/routes/Router';
 import cacheAssetsAsync from './app/utils/cacheAssetsAsync';
@@ -74,15 +75,15 @@ class AppContainer extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#273238',
+    backgroundColor: Colors.backgroundColor
   },
   navigation: {
-    backgroundColor: '#273238',
+    backgroundColor: Colors.backgroundColor,
     height: 70
   },
   statusBarUnderlay: {
     height: 24,
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: Colors.backgroundColor
   },
 });
 

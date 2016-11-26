@@ -1,22 +1,20 @@
-const tintColor = '#88CBC5';
-const mainColor = '#273238';
-const mainColorAlfa = 'rgba(82, 110, 125, 0.2)'
-const cardColor = '#88CBC5';
+const mainColor = '#88CBC5'; // green
+const backgroundColor = '#273238';
+const fadeMainColor = 'rgba(82, 110, 125, 0.2)';
 const likeColor = '#ff6363';
 
 export default {
+  backgroundColor,
   mainColor,
-  tintColor,
-  cardColor,
-  mainColorAlfa,
+  fadeMainColor,
   likeColor,
   tabIconDefault: '#808080',
-  tabIconSelected: tintColor,
+  tabIconSelected: mainColor,
   tabBar: '#fff',
   errorBackground: '#fff',
   errorText: '#fff',
-  warningBackground: '#EAEB5E',
+  warningBackground: likeColor,
   warningText: '#666804',
-  noticeBackground: tintColor,
+  noticeBackground: mainColor,
   noticeText: '#fff',
 };

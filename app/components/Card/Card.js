@@ -29,10 +29,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: 300,
-        backgroundColor: Colors.mainColorAlfa,
+        backgroundColor: Colors.fadeMainColor,
         borderRadius: 5,
         borderWidth: 2,
-        borderColor: Colors.cardColor
+        borderColor: Colors.mainColor
     },
     quoteText: {
         fontSize: 20,
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         paddingBottom: 20
     },
     actionButton: {
-        borderColor: Colors.cardColor,
+        borderColor: Colors.mainColor,
         borderWidth: 2
     },
 });

@@ -43,13 +43,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: Colors.mainColor,
+    backgroundColor: Colors.backgroundColor,
   },
   text: {
     marginTop: 10,
     marginBottom: 10,
-    color: Colors.tintColor,
-    backgroundColor: Colors.mainColorAlfa,
+    color: Colors.mainColor,
+    backgroundColor: Colors.fadeMainColor,
     padding: 10
   }
 });
