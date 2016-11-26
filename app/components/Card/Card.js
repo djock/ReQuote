@@ -9,12 +9,15 @@ import Colors from '../../constants/Colors';
 import Menu from './Menu';
 
 export default class Card extends React.Component {
+    
     render() {
         return (
             <View style={styles.card}>
                 <Text style={styles.quoteText}>{this.props.quote}</Text>
                 <Text style={styles.quoteAuthor}>― {this.props.author}</Text>
-                <Menu localQuoteCategory={this.props.category}/>
+                <Menu activeQuoteCategory={ this.props.category}
+                      activeQuoteId = {this.props.id}
+                />
             </View>
         )
     }
@@ -32,9 +35,9 @@ const styles = StyleSheet.create({
     },
     quoteText: {
         fontSize: 20,
-        marginBottom: 10,
+        marginTop: 10,
         textAlign: 'center',
-        padding: 25,
+        padding: 20,
         color: 'white',
         fontWeight: 'bold',
         shadowColor: '#000',

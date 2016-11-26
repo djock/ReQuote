@@ -9,15 +9,18 @@ import Colors from '../../constants/Colors';
 import Button from './Button';
 
 export default class Menu extends React.Component {
-
     render() {
-
         return (
         <View style={styles.container}>
-            <Text style={styles.quoteCategory}>Category: {this.props.localQuoteCategory.toUpperCase()}</Text>
-            <Button style={styles.button}/>
+            <Text style={styles.quoteCategory}>Category: {this.props.activeQuoteCategory.toUpperCase()}</Text>
+            <Button style={styles.button}  onPress={this._onPressHandler}
+                    quoteId = {this.props.activeQuoteId}
+            />
         </View>
         )
+    }
+    _onPressHandler() {
+        console.log("Touch");
     }
 }
 
@@ -32,7 +35,7 @@ const styles = StyleSheet.create({
     quoteCategory: {
         alignSelf: 'flex-start',
         fontSize: 10,
-        width: 220,
+        width: 210,
         marginTop: 15,
         marginLeft: 10,
         color: 'lightcyan',

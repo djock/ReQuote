@@ -10,15 +10,16 @@ import {Foundation} from '@exponent/vector-icons';
 import Colors from '../../constants/Colors';
 
 export default class Button extends React.Component {
-  render() {
+    render() {
         return (
-            <TouchableHighlight style={styles.button} underlayColor='transparent' onPress={this._onPressButton}>
+            <TouchableHighlight style={styles.button} underlayColor='transparent' onPress={() => this._handleTouch(this.props.quoteId)} >
                 <Foundation style={styles.icon} name="heart" size={24} />
             </TouchableHighlight>
         )
     }
-    _onPressButton() {
-        console.log("Button pressed!");
+
+    _handleTouch(quoteId) {
+        console.log("Quote ID: " + quoteId);
     }
 }
 
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
         color: Colors.likeColor
     },
     button: {
-        width: 40,
+        width: 70,
         height:40,
         alignSelf: 'flex-end',
     }
