@@ -5,6 +5,7 @@ import {
   Text
 } from 'react-native';
 import {Foundation} from '@exponent/vector-icons';
+
 import Colors from '../../constants/Colors';
 import Menu from './Menu';
 
