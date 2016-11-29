@@ -1,8 +1,16 @@
 {
-  "name": "requote",
-  "version": "0.0.0",
-  "description": "Hello Exponent!",
-  "author": null,
+  "name": "ReQuote",
+  "version": "1.0.0",
+  "description": "Quotes browser application made in React Native + ExponentJS!",
+  "author": "Ionut Mocanu",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djock/ReQuote.git"
+  },
+  "bugs": {
+    "url": "https://github.com/djock/ReQuote/issues"
+  },
   "main": "main.js",
   "scripts": {
     "test": "jest"
@@ -17,6 +25,7 @@
     "exponent": "~11.0.2",
     "react": "~15.3.2",
     "react-native": "git+https://github.com/exponentjs/react-native#sdk-11.0.3",
+    "react-native-animatable": "^1.0.0",
     "react-native-swipe-cards": "0.0.9"
   },
   "devDependencies": {

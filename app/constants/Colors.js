@@ -1,6 +1,6 @@
-const mainColor = '#88CBC5'; // green
-const backgroundColor = '#273238';
-const fadeMainColor = 'rgba(82, 110, 125, 0.2)';
+const mainColor = '#090909'; // green
+const backgroundColor = '#F4F4F4';
+const fadeMainColor = 'rgba(9, 9, 9, 0.7)';
 const likeColor = '#ff6363';
 
 export default {

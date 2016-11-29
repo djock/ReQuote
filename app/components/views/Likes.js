@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     color: Colors.mainColor,
-    backgroundColor: Colors.fadeMainColor,
-    padding: 10
+    padding: 10,
   }
 });

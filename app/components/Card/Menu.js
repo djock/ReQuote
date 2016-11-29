@@ -2,23 +2,26 @@ import React from 'react';
 import {
   View,  
   StyleSheet, 
-  Text
+  Text,
+  Dimensions
 } from 'react-native';
 
+import Layout from '../../constants/Layout'
 import Colors from '../../constants/Colors';
 import Button from './Button';
 import {FontAwesome} from '@exponent/vector-icons';
 
+const width = Dimensions.get('window').width;
+
 export default class Menu extends React.Component {
-    render() {
+    componentWillReceiveProps() {
+        if(this.props.localProps)
+            this.renderMenu();
+    }
+    renderMenu() {
         return (
         <View style={styles.container}>
-            <Text style={styles.quoteCategory}>
-                <FontAwesome name ='tag' style={styles.categoryIcon}/>{'  '}
-                {this.props.activeQuoteCategory.toUpperCase()}
-            </Text>
-            <Button style={styles.button}  onPress={this._onPressHandler}
-                    quoteId = {this.props.activeQuoteId}
+            <Button style={styles.button}  onPress={this._onPressHandler} localProps={this.props.localProps}
             />
         </View>
         )
@@ -26,27 +29,17 @@ export default class Menu extends React.Component {
     _onPressHandler() {
         console.log("Touch");
     }
+    render() {
+        return this.renderMenu();
+    }
 }
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        width: 296,
-        borderTopWidth: 1.5,
-        borderColor: Colors.fadeMainColor,
-    },
-    quoteCategory: {
-        alignSelf: 'flex-start',
-        fontSize: 10,
-        width: 220,
-        marginTop: 15,
-        marginLeft: 10,
-        color: 'lightcyan',
-        flexDirection: 'row',
-    },
-    button: {
-        alignSelf: 'flex-end',
+        width: width,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: Colors.backgroundColor
     },
     categoryIcon: {
         width: 100
