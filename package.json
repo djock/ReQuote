@@ -26,7 +26,7 @@
     "react": "~15.3.2",
     "react-native": "git+https://github.com/exponentjs/react-native#sdk-11.0.3",
     "react-native-animatable": "^1.0.0",
-    "react-native-swipe-cards": "0.0.9"
+    "react-native-swipe-cards": "git+https://github.com/djock/react-native-tinder-swipe-cards"
   },
   "devDependencies": {
     "jest-exponent": "~0.1.3"

@@ -74,6 +74,22 @@ export default class HomeScreen extends React.Component {
             </View>
         );
     }
+    _handleDown() {
+        console.log("Down");
+        this.updateQuotes();
+    }
+    _handleUp() {
+        console.log("Up");
+        this.updateQuotes();
+    }
+    _handleRight() {
+        console.log("Right");
+        this.updateQuotes();
+    }
+    _handleLeft() {
+        console.log("Left");
+        this.updateQuotes();
+    }
 
     renderQuote(quote) {
         return (
@@ -81,18 +97,17 @@ export default class HomeScreen extends React.Component {
                 <SwipeCards
                     cards={this.state.quotes}
                     renderCard={(cardData) => <Card {...cardData}/>}
-                    handleYup={this
-                    .updateQuotes
-                    .bind(this)}
-                    handleNope={this
-                    .updateQuotes
-                    .bind(this)}
+                    handleRight={this._handleRight.bind(this)}
+                    handleLeft={this._handleLeft.bind(this)}
+                    handleDown={this._handleDown.bind(this)}
+                    handleUp={this._handleUp.bind(this)}                    
                     showYup={false}
                     showNope={false}
                     containerStyle={styles.swipeCards}
                     frictionValue={20}
+                    rotation={false}
                     />
-                <Menu style={styles.menu} localProps={this.state.visibleQuoteId}/>
+                
             </View>
         );
     }
