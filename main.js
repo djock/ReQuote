@@ -15,12 +15,12 @@ import {
 import {
   FontAwesome,
 } from '@exponent/vector-icons';
-import Colors from './app/constants/Colors';
+import Colors from './app/Constants/Colors';
 
-import Router from './app/routes/Router';
-import cacheAssetsAsync from './app/utils/cacheAssetsAsync';
+import Router from './app/Routes/Router';
+import cacheAssetsAsync from './app/Utils/cacheAssetsAsync';
 
-class AppContainer extends React.Component {
+class ReQuote extends React.Component {
   state = {
     appIsReady: false,
   }
@@ -33,11 +33,14 @@ class AppContainer extends React.Component {
     try {
       await cacheAssetsAsync({
         images: [
-          require('./app/assets/images/exponent-wordmark.png'),
+          require('./app/Assets/Images/exponent-wordmark.png'),
         ],
         fonts: [
           FontAwesome.font,
-          {'space-mono': require('./app/assets/fonts/SpaceMono-Regular.ttf')},
+          {'space-mono': require('./app/Assets/Fonts/SpaceMono-Regular.ttf')},
+          {'palatino': require('./app/Assets/Fonts/Palatino-Regular.ttf')},
+          {'palatino-bold': require('./app/Assets/Fonts/Palatino-Bold.ttf')},
+          {'palatino-italic': require('./app/Assets/Fonts/Palatino-Italic.ttf')},
         ],
       });
     } catch(e) {
@@ -87,4 +90,4 @@ const styles = StyleSheet.create({
   },
 });
 
-Exponent.registerRootComponent(AppContainer);
+Exponent.registerRootComponent(ReQuote);

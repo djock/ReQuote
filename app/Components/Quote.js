@@ -6,19 +6,18 @@ import {
 } from 'react-native';
 import {Foundation} from '@exponent/vector-icons';
 
-import Colors from '../../constants/Colors';
-import Menu from './Menu';
-import Layout from '../../constants/Layout';
+import Colors from '../Constants/Colors';
+import Layout from '../Constants/Layout';
 
-export default class Card extends React.Component {
-    
+export default class Quote extends React.Component {
     render() {
+        console.log("Quote", this.props.id);
         return (
             <View style={styles.container}>
                 <View style={styles.card}>
-                    <Text style={styles.quoteText}>{this.props.quote}</Text>
-                    <Text style={styles.quoteAuthor}>― {this.props.author} ―</Text>
-                    <Text style={styles.quoteCategory}>{this.props.category}</Text>
+                    <Text style={styles.quote}>{this.props.quote}</Text>
+                    <Text style={styles.author}>{this.props.author}</Text>
+                    {/* <Text style={styles.category}>{this.props.category.toUpperCase()}</Text> */}
                 </View>
             </View>
         )
@@ -37,23 +36,25 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    quoteText: {
-        fontSize: 20,
+    quote: {
+        fontSize: 22,
         marginTop: 10,
         textAlign: 'center',
         padding: 20,
         color: Colors.mainColor,
-        fontWeight: 'bold',
+        fontFamily: 'palatino-bold',
     },
-    quoteAuthor: {
+    author: {
         textAlign: 'right',
         color: Colors.fadeMainColor,
         fontStyle: 'italic',
         alignSelf: 'center',
+        fontFamily: 'palatino',
     },
-    quoteCategory: {
-        color: 'lightsteelblue',
-        fontSize: 10,
-        marginTop: 10
+    category: {
+        lineHeight: 30,
+        alignSelf: 'center',
+        fontSize: 8,
+        color: 'darkgrey',
     }
 });

@@ -1,19 +1,18 @@
 import React from 'react';
 import {
     StyleSheet,
-    View
+    View,
+    AsyncStorage
 } from 'react-native';
 
 import SwipeCards from 'react-native-swipe-cards';
-import Card from '../Card/Card';
-
-import quotesJSON from '../../constants/Quotes.json';
-import Colors from '../../constants/Colors';
-import Menu from '../Card/Menu';
-
+import Quote from '../Quote';
+import quotesJSON from '../../Constants/Quotes.json';
+import Colors from '../../Constants/Colors';
+import MessageScreen from './MessageScreen'
 let QuotesArray = [];
 
-export default class HomeScreen extends React.Component {
+export default class QuotesBrowser extends React.Component {
     static route = {
         navigationBar: {
             visible: false,
@@ -30,7 +29,7 @@ export default class HomeScreen extends React.Component {
 
     componentDidMount() {
         this.getQuotes();
-        console.log("Init: " + this.state.visibleQuoteId);
+        AsyncStorage.clear();
     }
 
     getRandom(obj) {
@@ -45,7 +44,6 @@ export default class HomeScreen extends React.Component {
             QuotesArray.push(randomQuote);
         }
         this.setState({quotes: QuotesArray});
-        console.log(QuotesArray[0].id);
         this.setState({visibleQuoteId: QuotesArray[0].id })
     }
     updateQuotes() {
@@ -53,7 +51,27 @@ export default class HomeScreen extends React.Component {
         QuotesArray.push(this.getRandom(quotesJSON));
         this.setState({refreshQuote: true});
         this.setState({visibleQuoteId: QuotesArray[0].id })
-        console.log(this.state.visibleQuoteId);
+    }
+
+    async likeQuote() {
+        let id = JSON.stringify(QuotesArray[0].id);
+        console.log("Like",QuotesArray[0].id);
+        let jsonObj = {};
+        jsonObj["id"] = QuotesArray[0].id;
+        jsonObj["quote"] = QuotesArray[0].quote;
+        jsonObj["category"] = QuotesArray[0].category;
+        jsonObj["author"] = QuotesArray[0].author;
+
+        let quoteData = JSON.stringify(jsonObj);
+        
+        // Save the quote on the device
+        try {
+            await AsyncStorage.setItem(id, quoteData);
+            console.log("Save",id);
+        } catch (error) {
+            console.log(error)
+        }
+        this.updateQuotes();
     }
 
     render() {
@@ -67,27 +85,19 @@ export default class HomeScreen extends React.Component {
 
     renderLoadingView() {
         return (
-            <View style={styles.container}>
-                <Text style={styles.quoteAuthor}>
-                    Loading quotes...
-                </Text>
-            </View>
+            <MessageScreen text={'Loading...'}/>
         );
     }
-    _handleDown() {
-        console.log("Down");
+    handleDown() {
+        this.likeQuote();
+    }
+    handleUp() {
         this.updateQuotes();
     }
-    _handleUp() {
-        console.log("Up");
+    handleRight() {
         this.updateQuotes();
     }
-    _handleRight() {
-        console.log("Right");
-        this.updateQuotes();
-    }
-    _handleLeft() {
-        console.log("Left");
+    handleLeft() {
         this.updateQuotes();
     }
 
@@ -96,11 +106,11 @@ export default class HomeScreen extends React.Component {
             <View style={styles.container}>
                 <SwipeCards
                     cards={this.state.quotes}
-                    renderCard={(cardData) => <Card {...cardData}/>}
-                    handleRight={this._handleRight.bind(this)}
-                    handleLeft={this._handleLeft.bind(this)}
-                    handleDown={this._handleDown.bind(this)}
-                    handleUp={this._handleUp.bind(this)}                    
+                    renderCard={(cardData) => <Quote {...cardData}/>}
+                    handleRight={this.handleRight.bind(this)}
+                    handleLeft={this.handleLeft.bind(this)}
+                    handleDown={this.handleDown.bind(this)}
+                    handleUp={this.handleUp.bind(this)}                    
                     showYup={false}
                     showNope={false}
                     containerStyle={styles.swipeCards}
