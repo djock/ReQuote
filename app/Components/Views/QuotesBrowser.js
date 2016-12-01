@@ -23,18 +23,16 @@ export default class QuotesBrowser extends React.Component {
         super(props);
         this.state = {
             quotes: QuotesArray,
-            visibleQuoteId: 0
         };
     }
 
     componentDidMount() {
         this.getQuotes();
-        //AsyncStorage.clear();
+        // AsyncStorage.clear();
     }
 
     getRandom(obj) {
         var keys = Object.keys(obj);
-        this.setState({refreshQuote: false});
         return obj[keys[ keys.length * Math.random() << 0]];
     }
 
@@ -44,18 +42,15 @@ export default class QuotesBrowser extends React.Component {
             QuotesArray.push(randomQuote);
         }
         this.setState({quotes: QuotesArray});
-        this.setState({visibleQuoteId: QuotesArray[0].id })
     }
     updateQuotes() {
         QuotesArray.shift();
         QuotesArray.push(this.getRandom(quotesJSON));
-        this.setState({refreshQuote: true});
-        this.setState({visibleQuoteId: QuotesArray[0].id })
+        
     }
 
-    async likeQuote() {
+    likeQuote() {
         let id = JSON.stringify(QuotesArray[0].id);
-        console.log("Like",QuotesArray[0].id);
         let jsonObj = {};
         jsonObj["id"] = QuotesArray[0].id;
         jsonObj["quote"] = QuotesArray[0].quote;
@@ -66,7 +61,7 @@ export default class QuotesBrowser extends React.Component {
         
         // Save the quote on the device
         try {
-            await AsyncStorage.setItem(id, quoteData);
+            AsyncStorage.setItem(id, quoteData);
             console.log("Save",id);
         } catch (error) {
             console.log(error)
