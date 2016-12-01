@@ -29,7 +29,7 @@ export default class QuotesBrowser extends React.Component {
 
     componentDidMount() {
         this.getQuotes();
-        AsyncStorage.clear();
+        //AsyncStorage.clear();
     }
 
     getRandom(obj) {
