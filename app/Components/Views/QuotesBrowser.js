@@ -9,7 +9,9 @@ import SwipeCards from 'react-native-swipe-cards';
 import Quote from '../Quote';
 import quotesJSON from '../../Constants/Quotes.json';
 import Colors from '../../Constants/Colors';
-import MessageScreen from './MessageScreen'
+import MessageScreen from './MessageScreen';
+import Toast, {DURATION} from 'react-native-easy-toast';
+
 let QuotesArray = [];
 
 export default class QuotesBrowser extends React.Component {
@@ -66,6 +68,7 @@ export default class QuotesBrowser extends React.Component {
         } catch (error) {
             console.log(error)
         }
+        this.refs.toast.show('Quote saved!');
         this.updateQuotes();
     }
 
@@ -112,7 +115,12 @@ export default class QuotesBrowser extends React.Component {
                     frictionValue={20}
                     rotation={false}
                     />
-                
+                <Toast 
+                    ref="toast"
+                    style={{backgroundColor: Colors.likeColor}}
+                    position='bottom'
+                    positionValue={100}
+                />
             </View>
         );
     }

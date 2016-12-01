@@ -21,17 +21,24 @@ export default class LikesList extends React.Component {
         };
     }
     render() {
-        console.log(this.state.dataSource);
-        return (
-            <View style={{flex: 1}}>
-                <ListView
-                    dataSource={this.state.dataSource}
-                    renderRow={(data) => <LikesListItem {...data} />} 
-                    enableEmptySections={true}
-                    renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
-            />
-            </View>
-        );
+        console.log("Render list");
+        if(this.props.savedQuotesList.length != 0) {
+            return (
+                <View style={{flex: 1}}>
+                    <ListView
+                        dataSource={this.state.dataSource}
+                        renderRow={(data) => <LikesListItem {...data} />} 
+                        enableEmptySections={true}
+                        renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
+                />
+                </View>
+            );
+        } else {
+            return (
+                <MessageScreen text='Swipe down on a quote to save it'/>
+            );
+        }
+
     }
 }
 

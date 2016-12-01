@@ -16,7 +16,6 @@ export default class Quote extends React.Component {
                 <View style={styles.card}>
                     <Text style={styles.quote}>{this.props.quote}</Text>
                     <Text style={styles.author}>{this.props.author}</Text>
-                    <Text style={styles.author}>{this.props.id}</Text>
                     {/* <Text style={styles.category}>{this.props.category.toUpperCase()}</Text> */}
                 </View>
             </View>

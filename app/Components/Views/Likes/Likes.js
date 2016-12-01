@@ -2,7 +2,6 @@ import React from 'react';
 import {
   ScrollView,
   StyleSheet,
-  Text,
   AsyncStorage,
   View
 } from 'react-native';
@@ -49,8 +48,6 @@ export default class Likes extends React.Component {
     }
 
     render() {
-        console.log("render");
-
         if(this.state.isReady) {
             return (
                 <View style={styles.container}>
