@@ -17,12 +17,11 @@ export default class LikesList extends React.Component {
         super(props);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
-            dataSource: ds.cloneWithRows(this.props.savedQuotesList)
+            dataSource: ds.cloneWithRows(this.props.savedQuotesArray)
         };
     }
     render() {
-        console.log("Render list");
-        if(this.props.savedQuotesList.length != 0) {
+        if(this.props.savedQuotesArray.length != 0) {
             return (
                 <View style={{flex: 1}}>
                     <ListView
