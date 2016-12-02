@@ -32,12 +32,8 @@ class ReQuote extends React.Component {
   async _loadAssetsAsync() {
     try {
       await cacheAssetsAsync({
-        images: [
-          require('./app/Assets/Images/exponent-wordmark.png'),
-        ],
         fonts: [
           FontAwesome.font,
-          {'space-mono': require('./app/Assets/Fonts/SpaceMono-Regular.ttf')},
           {'palatino': require('./app/Assets/Fonts/Palatino-Regular.ttf')},
           {'palatino-bold': require('./app/Assets/Fonts/Palatino-Bold.ttf')},
           {'palatino-italic': require('./app/Assets/Fonts/Palatino-Italic.ttf')},

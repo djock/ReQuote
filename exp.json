@@ -5,23 +5,20 @@
   "sdkVersion": "11.0.0",
   "version": "1.0.0",
   "ios": {
-    "bundleIdentifier": "org.rnplay.exp",
-    "permissions": {
-      "remoteNotifications": true
-    }
+    "bundleIdentifier": "com.IonutMocanu.ReQuote"
   },
   "android": {
-    "package": "org.rnplay.exp"
+    "package": "com.IonutMocanu.ReQuote"
   },
   "orientation": "portrait",
-  "primaryColor": "#cccccc",
-  "iconUrl": "http://www.free-icons-download.net/images/closing-quotation-mark-symbol-75362.png",
+  "primaryColor": "#F4F4F4",
+  "iconUrl": "http://i.imgur.com/pbYHkM6.png",
   "notification": {
-    "iconUrl": "http://www.free-icons-download.net/images/closing-quotation-mark-symbol-75362.png",
+    "iconUrl": "http://i.imgur.com/pbYHkM6.png",
     "color": "#000000"
   },
   "loading": {
-    "iconUrl": "http://www.free-icons-download.net/images/closing-quotation-mark-symbol-75362.png",
+    "iconUrl": "http://i.imgur.com/D3m3Wgd.png",
     "hideExponentText": true
   },
   "packagerOpts": {
