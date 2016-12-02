@@ -4,11 +4,20 @@
   "slug": "requote",
   "sdkVersion": "11.0.0",
   "version": "1.0.0",
+  "ios": {
+    "bundleIdentifier": "org.rnplay.exp",
+    "permissions": {
+      "remoteNotifications": true
+    }
+  },
+  "android": {
+    "package": "org.rnplay.exp"
+  },
   "orientation": "portrait",
   "primaryColor": "#cccccc",
   "iconUrl": "http://www.free-icons-download.net/images/closing-quotation-mark-symbol-75362.png",
   "notification": {
-    "iconUrl": "https://s3.amazonaws.com/exp-us-standard/placeholder-push-icon-blue-circle.png",
+    "iconUrl": "http://www.free-icons-download.net/images/closing-quotation-mark-symbol-75362.png",
     "color": "#000000"
   },
   "loading": {
