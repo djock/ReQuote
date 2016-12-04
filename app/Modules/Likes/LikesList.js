@@ -8,9 +8,9 @@ import {
   ListView
 } from 'react-native';
 
-import Colors from '../../../Constants/Colors';
+import Colors from '../../Constants/Colors';
 import LikesListItem from './LikesListItem';
-import MessageScreen from '../MessageScreen';
+import MessageScreen from '../MessageScreen/MessageScreen';
 
 export default class LikesList extends React.Component {
     constructor(props) {

@@ -2,12 +2,14 @@ import {
   createRouter,
 } from '@exponent/ex-navigation';
 
-import QuotesBrowser from '../Components/Views/QuotesBrowser';
-import Likes from '../Components/Views/Likes/Likes';
-import RootNavigation from '../Components/RootNavigation';
+import QuotesBrowser from '../Modules/QuotesBrowser/QuotesBrowser';
+import Likes from '../Modules/Likes/Likes';
+import SelectCategories from '../Modules/SelectCategories/Categories'
+import RootNavigation from '../Modules/Navigation/RootNavigation';
 
 export default createRouter(() => ({
   quotesBrowser: () => QuotesBrowser,
   likes: () => Likes,
+  selectCategories: () => SelectCategories,
   rootNavigation: () => RootNavigation,
 }));

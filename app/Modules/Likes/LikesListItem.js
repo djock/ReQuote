@@ -5,8 +5,8 @@ import {
   StyleSheet
 } from 'react-native';
 
-import Colors from '../../../Constants/Colors';
-import Layout from '../../../Constants/Layout';
+import Colors from '../../Constants/Colors';
+import Layout from '../../Constants/Layout';
 
 let halfLayoutWidth = Layout.witdh / 2;
 

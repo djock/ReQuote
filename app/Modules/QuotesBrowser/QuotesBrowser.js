@@ -6,11 +6,13 @@ import {
 } from 'react-native';
 
 import SwipeCards from 'react-native-swipe-cards';
-import Quote from '../Quote';
-import quotesJSON from '../../Constants/Quotes.json';
-import Colors from '../../Constants/Colors';
-import MessageScreen from './MessageScreen';
 import Toast, {DURATION} from 'react-native-easy-toast';
+
+import Quote from './Quote';
+import quotesJSON from '../../Constants/Quotes.json';
+
+import Colors from '../../Constants/Colors';
+import MessageScreen from '../MessageScreen/MessageScreen';
 
 let QuotesArray = [];
 
@@ -41,13 +43,23 @@ export default class QuotesBrowser extends React.Component {
     getQuotes() {
         for(let i=0; i<=1; i++) {
             let randomQuote = this.getRandom(quotesJSON);
-            QuotesArray.push(randomQuote);
+            if(randomQuote.category === 'motivational') {
+                QuotesArray.push(randomQuote);
+            } else {
+                i--;
+            }
         }
         this.setState({quotes: QuotesArray});
     }
     updateQuotes() {
         QuotesArray.shift();
-        QuotesArray.push(this.getRandom(quotesJSON));
+        let randomQuote = this.getRandom(quotesJSON);
+        console.log(randomQuote.category);
+        if(randomQuote.category === 'motivational') {
+            QuotesArray.push(randomQuote);
+        } else {
+            this.updateQuotes();
+        }
         
     }
 
@@ -117,7 +129,7 @@ export default class QuotesBrowser extends React.Component {
                     />
                 <Toast 
                     ref="toast"
-                    style={{backgroundColor: Colors.likeColor}}
+                    style={styles.toast}
                     position='bottom'
                     positionValue={100}
                 />
@@ -137,7 +149,10 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         backgroundColor: Colors.backgroundColor
     },
-    menu :{
+    menu: {
         height: 75
+    },
+    toast: {
+        backgroundColor: Colors.likeColor,
     }
 });

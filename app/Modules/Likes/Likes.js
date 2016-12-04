@@ -7,9 +7,9 @@ import {
   ActivityIndicator
 } from 'react-native';
 
-import Colors from '../../../Constants/Colors';
+import Colors from '../../Constants/Colors';
 import LikesList from './LikesList';
-import MessageScreen from '../MessageScreen';
+import MessageScreen from '../MessageScreen/MessageScreen';
 
 export default class Likes extends React.Component {
     static route = {
@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     },
     activityIndicator: {
         flex: 1,
+        backgroundColor: Colors.backgroundColor,
         justifyContent: 'center',
         alignItems: 'center'
     }

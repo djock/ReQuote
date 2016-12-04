@@ -3,8 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {StackNavigation, TabNavigation, TabNavigationItem} from '@exponent/ex-navigation';
 import {FontAwesome} from '@exponent/vector-icons';
 
-import Alerts from '../Constants/Alerts';
-import Colors from '../Constants/Colors';
+import Colors from '../../Constants/Colors';
 
 export default class RootNavigation extends React.Component {
     render() {
@@ -18,10 +17,17 @@ export default class RootNavigation extends React.Component {
                 </TabNavigationItem>
 
                 <TabNavigationItem
-                    id="links"
+                    id="likes"
                     renderIcon=
                     {isSelected => this._renderIcon('heart', isSelected, true)}>
                     <StackNavigation initialRoute="likes"/>
+                </TabNavigationItem>
+
+                 <TabNavigationItem
+                    id="selectCategories"
+                    renderIcon=
+                    {isSelected => this._renderIcon('cog', isSelected)}>
+                    <StackNavigation initialRoute="selectCategories"/>
                 </TabNavigationItem>
             </TabNavigation>
         );
