@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import CheckBox from 'react-native-check-box'
-
+import QuotesBrowser from '../QuotesBrowser/QuotesBrowser';
 import Colors from '../../Constants/Colors';
 import Toast, {DURATION} from 'react-native-easy-toast';
 
@@ -35,7 +35,8 @@ export default class Categories extends React.Component {
             dataSource: ds.cloneWithRows(categories),
             savedCategories: SavedCategories,
             isDataChecked: false,
-            isReady: false
+            isReady: false,
+            hasBeenSaved: false
         };
     }
 
@@ -112,13 +113,24 @@ export default class Categories extends React.Component {
                             enableEmptySections={true}
                             renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
                     />
+                    <Toast 
+                        ref="toast"
+                        style={styles.toast}
+                        position='center'
+                        positionValue={100}
+                    />
                     <TouchableOpacity style={styles.saveButton} 
-                        onPress={this.onSaveCategories}
+                        onPress={ () => { this.onSaveCategories(); this.refs.toast.show('Saved!'); }}
                         activeOpacity ={0.7}
                         >
                         <Text style={styles.saveButtonText}>Save</Text>
                     </TouchableOpacity>
+                    
                 </View>
+            );
+        } else if (this.state.hasBeenSaved) {
+            return (
+                <QuotesBrowser />
             );
         } else {            
             return (
@@ -165,14 +177,24 @@ const styles = StyleSheet.create({
         padding: 10
     },
     saveButton: {
-        backgroundColor: Colors.mainColor,
         justifyContent: 'center',
         alignItems: 'center',
         width: 100,
         height: 35,
         alignSelf: 'center',
+        borderWidth: 1,
+        borderColor: Colors.mainColor,
+        borderRadius: 5,
     },
     saveButtonText: {
-        color: Colors.backgroundColor
+        color: Colors.mainColor
+    },
+    toast: {
+        backgroundColor: Colors.fadeMainColor,
+        width: 200,
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center'
+
     }
 });
