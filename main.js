@@ -60,7 +60,7 @@ class ReQuote extends React.Component {
 
           {Platform.OS === 'ios' && <StatusBar barStyle="default" hidden={true}  />}
           
-          {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
+          {Platform.OS === 'android' && <StatusBar barStyle="default" hidden={true}  />}
         </View>
       );
     } else {

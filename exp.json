@@ -8,7 +8,8 @@
     "bundleIdentifier": "com.IonutMocanu.ReQuote"
   },
   "android": {
-    "package": "com.IonutMocanu.ReQuote"
+    "package": "com.IonutMocanu.ReQuote",
+    "versionCode": "3"
   },
   "orientation": "portrait",
   "primaryColor": "#F4F4F4",
