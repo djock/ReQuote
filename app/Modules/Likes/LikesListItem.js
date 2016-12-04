@@ -19,7 +19,7 @@ export default class LikesListItem extends React.Component {
                 <Text style={styles.quote}>{this.props.quote}</Text>
                 <View style={styles.quoteInfo}>
                     <Text style={styles.author}>{this.props.author}</Text>
-                    {/* <Text style={styles.category}>Category: {this.props.category.toUpperCase()}</Text> */}
+                    <Text style={styles.category}>Category: {this.props.category.toUpperCase()}</Text> 
                 </View>
             </View>
         );

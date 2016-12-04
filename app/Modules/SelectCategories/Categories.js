@@ -157,7 +157,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         alignSelf: 'center',
         fontFamily: 'palatino-bold',
-        marginTop: 10
+        marginTop: 10,
+        marginBottom: 10
     },
     separator: {
         flex: 1,
@@ -185,6 +186,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: Colors.mainColor,
         borderRadius: 5,
+        marginTop: 20
     },
     saveButtonText: {
         color: Colors.mainColor
