@@ -3,19 +3,25 @@ import {
     StyleSheet,
     View,
     ListView,
-    Text
+    Text,
+    TouchableOpacity,
+    AsyncStorage,
+    ActivityIndicator
 } from 'react-native';
 
-import CheckBox from 'react-native-checkbox';
+import CheckBox from 'react-native-check-box'
 
 import Colors from '../../Constants/Colors';
 import Toast, {DURATION} from 'react-native-easy-toast';
 
-const categories = ['art', 'best', 'courage', 'failure', 'faith', 'fear', 'forgiveness', 
-                    'friendship', 'funny', 'hope', 'inspirational', 'knowledge', 'leadership', 'life', 
-                    'love', 'music', 'motivational', 'positive', 'strength', 'success', 'thankful', 'wisdom'];
+const categories = ['art', 'popular', 'courage', 'failure', 'faith', 'fear', 'forgiveness', 
+                    'friendship', 'funny', 'gratitude', 'hope', 'inspirational', 'knowledge', 'leadership', 'life', 
+                    'love', 'music', 'motivational', 'positive', 'strength', 'success', 'wisdom'];
 
-export default class SelectCategories extends React.Component {
+let SavedCategories = [];
+const STORAGE_KEY = 'categories';
+
+export default class Categories extends React.Component {
     static route = {
         navigationBar: {
             visible: false,
@@ -26,41 +32,147 @@ export default class SelectCategories extends React.Component {
         super(props);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
-            dataSource: ds.cloneWithRows(categories)
+            dataSource: ds.cloneWithRows(categories),
+            savedCategories: SavedCategories,
+            isDataChecked: false,
+            isReady: false
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
+        this.getSavedCategories();
+    }
+
+    isCategorySaved(data) {
+        if (this.state.savedCategories.indexOf(data) != -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    onCheckCategory(data) {
+        let isAlreadySaved = this.isCategorySaved(data)
+
+        if(!isAlreadySaved) {
+            SavedCategories.push(data);
+        } else {
+            let index = SavedCategories.indexOf(data);
+            SavedCategories.splice(index, 1);
+        }
+        this.setState({savedCategories: SavedCategories});
+    }
+
+    async getSavedCategories() {
+        userCategories = await AsyncStorage.getItem(STORAGE_KEY);
+
+        let data = JSON.parse(userCategories);
+        if(data === null) {
+            SavedCategories = categories;
+        } else {
+            for( let i = 0; i< data.length; i++) {
+                SavedCategories.push(data[i])
+            }
+        }
+
+        this.setState({category: SavedCategories});
+        this.setState({isReady: true});
+    }
+
+    onSaveCategories() {
+        let categories = JSON.stringify(SavedCategories);
+        try {
+            AsyncStorage.setItem(STORAGE_KEY, categories);
+            console.log("Update categories", categories);
+        } catch (error) {
+            console.log("Error", error)
+        }
+    }
+
+    renderListItem(data) {
+        let isChecked = SavedCategories.indexOf(data) != -1 ? true : false;
+
+        return(
+            <CheckBox style={styles.listItem}
+                leftText={data.toUpperCase()}
+                isChecked={isChecked}
+                onClick={() => this.onCheckCategory(data)}
+            />
+        );
     }
 
     render() {
-        return (
-            <View style={styles.container}>
-                <Text>Select your favorite categories through which you can browse</Text>
-                <ListView
-                        dataSource={this.state.dataSource}
-                        labelBefore={true}
-                        renderRow={(data) => <CheckBox
-                            label={data}
-                            checked={true}
-                            onChange={(checked) => console.log('I am checked', checked)}
-                        />} 
-                        enableEmptySections={true}
-                        renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
-                />
-            </View>
-        );
+        if(this.state.isReady) {
+            return (
+                <View style={styles.container}>
+                    <Text style={styles.title}>Choose categories</Text>
+                    <ListView style={styles.listView}
+                            dataSource={this.state.dataSource}
+                            renderRow={(data) => this.renderListItem(data)} 
+                            enableEmptySections={true}
+                            renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
+                    />
+                    <TouchableOpacity style={styles.saveButton} 
+                        onPress={this.onSaveCategories}
+                        activeOpacity ={0.7}
+                        >
+                        <Text style={styles.saveButtonText}>Save</Text>
+                    </TouchableOpacity>
+                </View>
+            );
+        } else {            
+            return (
+                <View style={styles.activityIndicator}>
+                    <ActivityIndicator
+                        animating={this.state.animating}
+                        style={[styles.centering, styles.gray, {height: 80}]}
+                        size="large"
+                    />
+                </View>
+            );
+        }
+        
     }
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.backgroundColor
+        backgroundColor: Colors.backgroundColor,
+        padding: 5
     },
-    text: {
+    title: {
+        fontSize: 20,
+        alignSelf: 'center',
+        fontFamily: 'palatino-bold',
+        marginTop: 10
+    },
+    separator: {
         flex: 1,
+        height: StyleSheet.hairlineWidth,
+        backgroundColor: 'lightgrey',
+    },
+    activityIndicator: {
+        flex: 1,
+        backgroundColor: Colors.backgroundColor,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    listView: {
+        padding: 10
+    }, 
+    listItem: {
+        padding: 10
+    },
+    saveButton: {
+        backgroundColor: Colors.mainColor,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 100,
+        height: 35,
+        alignSelf: 'center',
+    },
+    saveButtonText: {
+        color: Colors.backgroundColor
     }
 });

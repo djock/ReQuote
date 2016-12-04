@@ -13,15 +13,20 @@ let halfLayoutWidth = Layout.witdh / 2;
 export default class LikesListItem extends React.Component {
 
   render() {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.quote}>{this.props.quote}</Text>
-            <View style={styles.quoteInfo}>
-                <Text style={styles.author}>{this.props.author}</Text>
-                {/* <Text style={styles.category}>Category: {this.props.category.toUpperCase()}</Text> */}
+      if(this.props.quote != null) {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.quote}>{this.props.quote}</Text>
+                <View style={styles.quoteInfo}>
+                    <Text style={styles.author}>{this.props.author}</Text>
+                    {/* <Text style={styles.category}>Category: {this.props.category.toUpperCase()}</Text> */}
+                </View>
             </View>
-        </View>
-    );
+        );
+      } else {
+          return (null);
+      }
+    
   }
 
 }

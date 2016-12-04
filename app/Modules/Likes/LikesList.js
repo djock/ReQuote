@@ -21,7 +21,7 @@ export default class LikesList extends React.Component {
         };
     }
     render() {
-        if(this.props.savedQuotesArray.length != 0) {
+        if(this.props.savedQuotesArray.length != 0 && this.props.savedQuotesArray[0].quote != null) {
             return (
                 <View style={{flex: 1}}>
                     <ListView

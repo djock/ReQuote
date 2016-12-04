@@ -36,7 +36,9 @@ export default class Likes extends React.Component {
         let quotesObjVals = [];
 
         allKeys = await AsyncStorage.getAllKeys();
+        console.log(allKeys);
 
+        
         AsyncStorage.multiGet(allKeys, (err, results) => {
             results.map( (results, i, store) => {
                 let key = store[i][0];
@@ -44,7 +46,6 @@ export default class Likes extends React.Component {
 
                 parsedValue = JSON.parse(val);
                 quotesObj[key] = parsedValue;
-
                 quotesObjVals.push(parsedValue);
                 quotesObjKeys.push(key)
             });

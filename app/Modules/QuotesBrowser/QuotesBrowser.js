@@ -2,7 +2,8 @@ import React from 'react';
 import {
     StyleSheet,
     View,
-    AsyncStorage
+    AsyncStorage,
+    ActivityIndicator
 } from 'react-native';
 
 import SwipeCards from 'react-native-swipe-cards';
@@ -15,6 +16,12 @@ import Colors from '../../Constants/Colors';
 import MessageScreen from '../MessageScreen/MessageScreen';
 
 let QuotesArray = [];
+let CategoriesArray =[];
+const STORAGE_KEY = 'categories';
+
+const localCategories = ['art', 'popular', 'courage', 'failure', 'faith', 'fear', 'forgiveness', 
+                    'friendship', 'funny', 'gratitude', 'hope', 'inspirational', 'knowledge', 'leadership', 'life', 
+                    'love', 'music', 'motivational', 'positive', 'strength', 'success', 'wisdom'];
 
 export default class QuotesBrowser extends React.Component {
     static route = {
@@ -27,12 +34,13 @@ export default class QuotesBrowser extends React.Component {
         super(props);
         this.state = {
             quotes: QuotesArray,
+            categories: CategoriesArray
         };
     }
 
     componentDidMount() {
         this.getQuotes();
-        // AsyncStorage.clear();
+        AsyncStorage.clear();
     }
 
     getRandom(obj) {
@@ -40,10 +48,26 @@ export default class QuotesBrowser extends React.Component {
         return obj[keys[ keys.length * Math.random() << 0]];
     }
 
-    getQuotes() {
+
+    async getCategories() {
+        userCategories = await AsyncStorage.getItem(STORAGE_KEY);
+        CategoriesArray = [];
+        let data = JSON.parse(userCategories);
+        if(data === null) {
+            CategoriesArray = localCategories;
+        } else {
+            for( let i = 0; i< data.length; i++) {
+                CategoriesArray.push(data[i])
+            }
+        }
+        this.setState({categories: CategoriesArray});
+    }
+
+    async getQuotes() {
+        await this.getCategories();
         for(let i=0; i<=1; i++) {
             let randomQuote = this.getRandom(quotesJSON);
-            if(randomQuote.category === 'motivational') {
+            if(CategoriesArray.indexOf(randomQuote.category) != -1) {
                 QuotesArray.push(randomQuote);
             } else {
                 i--;
@@ -51,14 +75,15 @@ export default class QuotesBrowser extends React.Component {
         }
         this.setState({quotes: QuotesArray});
     }
-    updateQuotes() {
+    async updateQuotes(shouldGetCategories = true) {
+        if(shouldGetCategories)
+            await this.getCategories();
         QuotesArray.shift();
         let randomQuote = this.getRandom(quotesJSON);
-        console.log(randomQuote.category);
-        if(randomQuote.category === 'motivational') {
+        if(CategoriesArray.indexOf(randomQuote.category) != -1) {
             QuotesArray.push(randomQuote);
         } else {
-            this.updateQuotes();
+            this.updateQuotes(false);
         }
         
     }
@@ -78,7 +103,7 @@ export default class QuotesBrowser extends React.Component {
             AsyncStorage.setItem(id, quoteData);
             console.log("Save",id);
         } catch (error) {
-            console.log(error)
+            console.log("Error", error)
         }
         this.refs.toast.show('Quote saved!');
         this.updateQuotes();
@@ -95,7 +120,13 @@ export default class QuotesBrowser extends React.Component {
 
     renderLoadingView() {
         return (
-            <MessageScreen text={'Loading...'}/>
+            <View style={styles.activityIndicator}>
+                <ActivityIndicator
+                    animating={this.state.animating}
+                    style={[styles.centering, styles.gray, {height: 80}]}
+                    size="large"
+                />
+            </View>
         );
     }
     handleDown() {
@@ -120,7 +151,8 @@ export default class QuotesBrowser extends React.Component {
                     handleRight={this.handleRight.bind(this)}
                     handleLeft={this.handleLeft.bind(this)}
                     handleDown={this.handleDown.bind(this)}
-                    handleUp={this.handleUp.bind(this)}                    
+                    handleUp={this.handleUp.bind(this)} 
+                    renderNoMoreCards={() => this.renderLoadingView }                  
                     showYup={false}
                     showNope={false}
                     containerStyle={styles.swipeCards}
@@ -154,5 +186,11 @@ const styles = StyleSheet.create({
     },
     toast: {
         backgroundColor: Colors.likeColor,
+    },
+    activityIndicator: {
+        flex: 1,
+        backgroundColor: Colors.backgroundColor,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 });
