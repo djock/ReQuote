@@ -30,8 +30,9 @@
     "react-native-checkbox": "git+https://github.com/Jaafar-abusair/react-native-checkbox",
     "react-native-checkbox-field": "^1.1.1",
     "react-native-easy-toast": "git+https://github.com/djock/react-native-easy-toast",
+    "react-native-linear-gradient": "^1.5.15",
     "react-native-material-kit": "^0.3.3",
-    "react-native-swipe-cards": "git+https://github.com/djock/react-native-tinder-swipe-cards"
+    "react-native-swipe-cards": "git+https://github.com/djock/react-native-tinder-swipe-cards/tree/dev"
   },
   "devDependencies": {
     "jest-exponent": "~0.1.3"

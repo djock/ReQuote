@@ -44,26 +44,6 @@ export default class Categories extends React.Component {
         this.getSavedCategories();
     }
 
-    isCategorySaved(data) {
-        if (this.state.savedCategories.indexOf(data) != -1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    onCheckCategory(data) {
-        let isAlreadySaved = this.isCategorySaved(data)
-
-        if(!isAlreadySaved) {
-            SavedCategories.push(data);
-        } else {
-            let index = SavedCategories.indexOf(data);
-            SavedCategories.splice(index, 1);
-        }
-        this.setState({savedCategories: SavedCategories});
-    }
-
     async getSavedCategories() {
         userCategories = await AsyncStorage.getItem(STORAGE_KEY);
 
@@ -87,6 +67,26 @@ export default class Categories extends React.Component {
             console.log("Update categories", categories);
         } catch (error) {
             console.log("Error", error)
+        }
+    }
+
+    onCheckCategory(data) {
+        let isAlreadySaved = this.isCategorySaved(data)
+
+        if(!isAlreadySaved) {
+            SavedCategories.push(data);
+        } else {
+            let index = SavedCategories.indexOf(data);
+            SavedCategories.splice(index, 1);
+        }
+        this.setState({savedCategories: SavedCategories});
+    }
+
+    isCategorySaved(data) {
+        if (this.state.savedCategories.indexOf(data) != -1) {
+            return true;
+        } else {
+            return false;
         }
     }
 

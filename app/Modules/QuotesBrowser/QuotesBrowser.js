@@ -153,10 +153,10 @@ export default class QuotesBrowser extends React.Component {
                     handleDown={this.handleDown.bind(this)}
                     handleUp={this.handleUp.bind(this)} 
                     renderNoMoreCards={() => this.renderLoadingView }                  
-                    showYup={false}
-                    showNope={false}
+                    showYup={true}
+                    showNope={true}
                     containerStyle={styles.swipeCards}
-                    frictionValue={20}
+                    frictionValue={40}
                     rotation={false}
                     />
                 <Toast 

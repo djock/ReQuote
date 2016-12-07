@@ -41,14 +41,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         padding: 20,
         color: Colors.mainColor,
-        fontFamily: 'palatino-bold',
+        fontWeight: '500'
     },
     author: {
         textAlign: 'right',
         color: Colors.fadeMainColor,
         fontStyle: 'italic',
         alignSelf: 'center',
-        fontFamily: 'palatino',
+        padding: 10
     },
     category: {
         lineHeight: 30,

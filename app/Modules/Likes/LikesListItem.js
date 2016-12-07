@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         color: Colors.mainColor,
         fontSize: 18,
         marginTop: 5,
-        fontFamily: 'palatino-bold',
+        fontWeight: '500'
         
     },
     author: {
@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
         color: Colors.fadeMainColor,
         width: halfLayoutWidth,
         fontStyle: 'italic',
-        fontFamily: 'palatino'
     },
     category: {
         flex:0.5,
