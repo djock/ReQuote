@@ -1,6 +1,6 @@
 {
   "name": "ReQuote",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Quotes browser application made in React Native + ExponentJS!",
   "author": "Ionut Mocanu",
   "license": "MIT",

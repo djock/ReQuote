@@ -3,13 +3,13 @@
   "description": "Quotes browser application",
   "slug": "requote",
   "sdkVersion": "11.0.0",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "ios": {
     "bundleIdentifier": "com.IonutMocanu.ReQuote"
   },
   "android": {
     "package": "com.IonutMocanu.ReQuote",
-    "versionCode": "3"
+    "versionCode": "4"
   },
   "orientation": "portrait",
   "primaryColor": "#F4F4F4",
