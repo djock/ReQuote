@@ -58,9 +58,9 @@ class ReQuote extends React.Component {
             <StackNavigation style={styles.navigation} id="root" initialRoute={Router.getRoute('rootNavigation')} />
           </NavigationProvider>
 
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" hidden={true}  />}
+          {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" translucent={true} hidden={false}  />}
           
-          {Platform.OS === 'android' && <StatusBar barStyle="default" hidden={true}  />}
+          {Platform.OS === 'android' && <StatusBar barStyle="dark-content" translucent={true} hidden={false}  />}
         </View>
       );
     } else {

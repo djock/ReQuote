@@ -44,7 +44,8 @@ export default class LikesList extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 3
+        padding: 3,
+        backgroundColor: Colors.backgroundColor
     },
     separator: {
         flex: 1,

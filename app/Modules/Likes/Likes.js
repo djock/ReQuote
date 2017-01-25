@@ -102,7 +102,7 @@ export default class Likes extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 15,
+        paddingTop: 30,
         backgroundColor: Colors.backgroundColor,
     },
     text: {

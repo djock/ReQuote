@@ -7,21 +7,34 @@ import {
 
 import Colors from '../../Constants/Colors';
 import Layout from '../../Constants/Layout';
+import Swipeout from 'react-native-swipeout';
 
 let halfLayoutWidth = Layout.witdh / 2;
-
+let swipeoutBtns = [
+  {
+    text: 'Delete', type: 'delete'
+  }
+]
 export default class LikesListItem extends React.Component {
+
+    removeQuote(quoteId) {
+
+    }
 
   render() {
       if(this.props.quote != null) {
         return (
-            <View style={styles.container}>
-                <Text style={styles.quote}>{this.props.quote}</Text>
-                <View style={styles.quoteInfo}>
-                    <Text style={styles.author}>{this.props.author}</Text>
-                    <Text style={styles.category}>Category: {this.props.category.toUpperCase()}</Text> 
+            <Swipeout right={swipeoutBtns}  
+            style={styles.container}
+            onOpen={(id) => this.removeQuote(this.props.id)}>
+                <View>
+                    <Text style={styles.quote}>{this.props.quote}</Text>
+                    <View style={styles.quoteInfo}>
+                        <Text style={styles.author}>{this.props.author}</Text>
+                        <Text style={styles.category}>Category: {this.props.category.toUpperCase()}</Text> 
+                    </View>
                 </View>
-            </View>
+            </Swipeout>
         );
       } else {
           return (null);
@@ -33,27 +46,32 @@ export default class LikesListItem extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 10
+        paddingHorizontal: 20,
+        backgroundColor: Colors.backgroundColor,
     },
     quoteInfo:{
         flex: 1,
         flexDirection: 'row',
-        marginTop: 5
+        backgroundColor: Colors.backgroundColor,
+        paddingTop: 5
     },
     quote: {
         color: Colors.mainColor,
         fontSize: 18,
-        marginTop: 5,
-        fontWeight: '500'
-        
+        backgroundColor: Colors.backgroundColor,
+        paddingTop: 5,
+        fontWeight: '500',
+        fontFamily: 'palatino-bold'
     },
     author: {
         flex:0.5,
         height: 30,
         lineHeight: 30,
+        backgroundColor: Colors.backgroundColor,
         color: Colors.fadeMainColor,
-        width: halfLayoutWidth,
+        // width: halfLayoutWidth,
         fontStyle: 'italic',
+        fontFamily: 'palatino'
     },
     category: {
         flex:0.5,
@@ -61,7 +79,7 @@ const styles = StyleSheet.create({
         lineHeight: 30,
         textAlign: 'right',
         fontSize: 8,
-        width: halfLayoutWidth,
+        // width: halfLayoutWidth,
         color: 'darkgrey',
         alignSelf: 'flex-end'
     }

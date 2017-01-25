@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         textAlign: 'center',
         padding: 20,
+        fontFamily: 'palatino-bold',
         color: Colors.mainColor,
         fontWeight: '500'
     },
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         color: Colors.fadeMainColor,
         fontStyle: 'italic',
+        fontFamily: 'palatino',
         alignSelf: 'center',
         padding: 10
     },

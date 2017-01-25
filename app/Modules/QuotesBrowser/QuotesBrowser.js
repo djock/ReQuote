@@ -40,7 +40,7 @@ export default class QuotesBrowser extends React.Component {
 
     componentDidMount() {
         this.getQuotes();
-        // AsyncStorage.clear();
+        AsyncStorage.clear();
     }
 
     getRandom(obj) {
@@ -153,11 +153,9 @@ export default class QuotesBrowser extends React.Component {
                     handleDown={this.handleDown.bind(this)}
                     handleUp={this.handleUp.bind(this)} 
                     renderNoMoreCards={() => this.renderLoadingView }                  
-                    showYup={true}
-                    showNope={true}
+                    showYup={false}
+                    showNope={false}
                     containerStyle={styles.swipeCards}
-                    frictionValue={40}
-                    rotation={false}
                     />
                 <Toast 
                     ref="toast"
