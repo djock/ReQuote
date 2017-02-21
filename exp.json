@@ -2,22 +2,20 @@
   "name": "ReQuote",
   "description": "Quotes browser application",
   "slug": "requote",
-  "sdkVersion": "11.0.0",
-  "version": "1.2.1",
+  "sdkVersion": "14.0.0",
+  "version": "1.0.1",
   "ios": {
     "bundleIdentifier": "com.IonutMocanu.ReQuote"
   },
   "android": {
     "package": "com.IonutMocanu.ReQuote",
-    "versionCode": "4"
+    "versionCode": 4
   },
   "orientation": "portrait",
   "primaryColor": "#F4F4F4",
-  "iconUrl": "http://i.imgur.com/pbYHkM6.png",
-  "notification": {
-    "iconUrl": "http://i.imgur.com/pbYHkM6.png",
-    "color": "#000000"
-  },
+  "privacy": "public",
+  "icon": "http://i.imgur.com/pbYHkM6.png",
+
   "loading": {
     "iconUrl": "http://i.imgur.com/D3m3Wgd.png",
     "hideExponentText": true

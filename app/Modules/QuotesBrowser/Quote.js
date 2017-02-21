@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
         padding: 20,
         fontFamily: 'palatino-bold',
         color: Colors.mainColor,
+        lineHeight: 35
     },
     author: {
         textAlign: 'right',

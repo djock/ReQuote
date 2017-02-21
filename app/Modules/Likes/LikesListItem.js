@@ -7,7 +7,7 @@ import {
 
 import Colors from '../../Constants/Colors';
 import Layout from '../../Constants/Layout';
-import Swipeout from 'react-native-swipeout';
+// import Swipeout from 'react-native-swipeout';
 
 let halfLayoutWidth = Layout.witdh / 2;
 let swipeoutBtns = [
@@ -24,9 +24,8 @@ export default class LikesListItem extends React.Component {
   render() {
       if(this.props.quote != null) {
         return (
-            <Swipeout right={swipeoutBtns}  
-            style={styles.container}
-            onOpen={(id) => this.removeQuote(this.props.id)}>
+            <View 
+            style={styles.container}>
                 <View>
                     <Text style={styles.quote}>{this.props.quote}</Text>
                     <View style={styles.quoteInfo}>
@@ -34,7 +33,7 @@ export default class LikesListItem extends React.Component {
                         <Text style={styles.category}>Category: {this.props.category.toUpperCase()}</Text> 
                     </View>
                 </View>
-            </Swipeout>
+            </View>
         );
       } else {
           return (null);
@@ -46,7 +45,7 @@ export default class LikesListItem extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 20,
+        paddingHorizontal: 10,
         backgroundColor: Colors.backgroundColor,
     },
     quoteInfo:{
