@@ -48,14 +48,14 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         color: Colors.fadeMainColor,
         fontStyle: 'italic',
-        fontFamily: 'palatino',
         alignSelf: 'center',
-        padding: 10
+        padding: 10,
+        fontFamily: 'palatino'
     },
     category: {
         lineHeight: 30,
         alignSelf: 'center',
         fontSize: 8,
-        color: 'darkgrey',
+        color: 'darkgrey'
     }
 });
