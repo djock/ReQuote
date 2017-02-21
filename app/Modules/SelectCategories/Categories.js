@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         alignSelf: 'center',
         fontFamily: 'palatino-bold',
-        marginTop: 10,
+        marginTop: 20,
         marginBottom: 10
     },
     separator: {

@@ -23,7 +23,7 @@ export default class LikesList extends React.Component {
     render() {
         if(this.props.savedQuotesArray.length != 0 && this.props.savedQuotesArray[0].quote != null) {
             return (
-                <View style={{flex: 1}}>
+                <View style={styles.container}>
                     <ListView
                         dataSource={this.state.dataSource}
                         renderRow={(data) => <LikesListItem {...data} />} 
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     separator: {
         flex: 1,
         height: StyleSheet.hairlineWidth,
-        backgroundColor: 'lightgrey',
+        marginTop: 10,
+        backgroundColor: 'darkgray',
     }
 });

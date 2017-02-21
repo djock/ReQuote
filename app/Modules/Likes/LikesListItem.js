@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         backgroundColor: Colors.backgroundColor,
         paddingTop: 5,
-        fontWeight: '500',
         fontFamily: 'palatino-bold'
     },
     author: {
@@ -69,9 +68,7 @@ const styles = StyleSheet.create({
         lineHeight: 30,
         backgroundColor: Colors.backgroundColor,
         color: Colors.fadeMainColor,
-        // width: halfLayoutWidth,
-        fontStyle: 'italic',
-        fontFamily: 'palatino'
+        fontFamily: 'palatino-italic'
     },
     category: {
         flex:0.5,
@@ -79,7 +76,6 @@ const styles = StyleSheet.create({
         lineHeight: 30,
         textAlign: 'right',
         fontSize: 8,
-        // width: halfLayoutWidth,
         color: 'darkgrey',
         alignSelf: 'flex-end'
     }

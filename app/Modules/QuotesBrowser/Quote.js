@@ -42,15 +42,13 @@ const styles = StyleSheet.create({
         padding: 20,
         fontFamily: 'palatino-bold',
         color: Colors.mainColor,
-        fontWeight: '500'
     },
     author: {
         textAlign: 'right',
         color: Colors.fadeMainColor,
-        fontStyle: 'italic',
         alignSelf: 'center',
         padding: 10,
-        fontFamily: 'palatino'
+        fontFamily: 'palatino-italic'
     },
     category: {
         lineHeight: 30,
