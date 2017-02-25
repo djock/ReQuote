@@ -20,6 +20,7 @@ export default class LikesList extends React.Component {
             dataSource: ds.cloneWithRows(this.props.savedData)
         };
     }
+
     render() {
         if(this.props.savedData.length != 0 && this.props.savedData[0].text != null) {
             return (

@@ -35,8 +35,6 @@ export default class Likes extends React.Component {
         let dataObjVals = [];
 
         allKeys = await AsyncStorage.getAllKeys();
-        console.log(allKeys);
-
         
         AsyncStorage.multiGet(allKeys, (err, results) => {
             results.map( (results, i, store) => {

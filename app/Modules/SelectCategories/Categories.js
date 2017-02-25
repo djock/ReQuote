@@ -37,19 +37,12 @@ export default class Categories extends React.Component {
             isReady: false,
             hasBeenSaved: false,
             areAllChecked: true,
-            hasBeenModified: false
         };
     }
 
     componentWillMount() {
         this.getUserSavedCategories();
     }
-
-    componentDidMount() {
-        this.setState({hasBeenModified: false});
-        console.log("Did mount");
-    }
-
 
     async getUserSavedCategories() {
         userCategories = await AsyncStorage.getItem(STORAGE_KEY);
@@ -63,7 +56,7 @@ export default class Categories extends React.Component {
             }
         }
 
-        this.setState({category: UserSavedCategories});
+        this.setState({savedCategories: UserSavedCategories});
         this.setState({isReady: true});
     }
 
@@ -77,8 +70,8 @@ export default class Categories extends React.Component {
     }
 
     onCheck(data) {
-        let isAlreadySaved = this.isCategorySaved(data)
-
+        let isAlreadySaved = this.isCategorySaved(data);
+        
         if(!isAlreadySaved) {
             UserSavedCategories.push(data);
         } else {
@@ -90,29 +83,31 @@ export default class Categories extends React.Component {
 
     onCheckAll(isChecked) {
         this.setState({isReady: false});
-
+        console.log("is checked?", isChecked);
+        // console.log("1. Categories:", UserSavedCategories);
         //hack to refresh view
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        this.setState({dataSource: ds.cloneWithRows(AppCategories)});
-
-        this.setState({areAllChecked: isChecked});
-        this.setState({hasBeenModified: true});
-        this.setState({isReady: true});
+        this.setState(
+            {
+                dataSource: ds.cloneWithRows(AppCategories),
+                areAllChecked: isChecked,
+                isReady: true
+            }
+        );
     }
 
     isCategorySaved(data) {
-        this.state.savedCategories.indexOf(data) != -1 ? true : false;
+        return this.state.savedCategories.indexOf(data) != -1 ? true : false;
     }
 
     renderListItem(data) {
-        let isChecked = true;
-
-        // console.log("Modify", this.state.hasBeenModified)
-        if(this.state.hasBeenModified) {
-            isChecked = this.state.areAllChecked ? true : false;
+        if(!this.state.areAllChecked) {
+            UserSavedCategories = [];
         } else {
-            isChecked = UserSavedCategories.indexOf(data) != -1 ? true : false;
+            UserSavedCategories = AppCategories;
         }
+        let isChecked = UserSavedCategories.indexOf(data) != -1 ? true : false; 
+
         return(
             <CheckBox style={styles.listItem}
                 leftText={data.toUpperCase()} 
@@ -130,7 +125,7 @@ export default class Categories extends React.Component {
                 leftText={'Categories'}
                 isChecked={isChecked}
                 leftTextStyle={styles.title}
-                onClick={() => this.onCheckAll(!isChecked)}
+                onClick={() => {console.log("test")}}
             />
         );
     }
