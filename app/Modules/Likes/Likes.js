@@ -15,25 +15,24 @@ export default class Likes extends React.Component {
     static route = {
         navigationBar: {
             visible: false,
-            title: 'Likes',
         },
     }
     constructor(props) {
         super(props);
         this.state = {
-            savedQuotesArray: [],
-            savedQuotesIds: [],
+            savedData: [],
+            savedDataIds: [],
             isReady: false,
         };
     }
     componentDidMount() {
-        this.getSavedQuotes();
+        this.getSavedData();
     }
 
-    async getSavedQuotes() {
-        let quotesObj = {};
-        let quotesObjKeys = [];
-        let quotesObjVals = [];
+    async getSavedData() {
+        let dataObj = {};
+        let dataObjKeys = [];
+        let dataObjVals = [];
 
         allKeys = await AsyncStorage.getAllKeys();
         console.log(allKeys);
@@ -45,19 +44,19 @@ export default class Likes extends React.Component {
                 let val = store[i][1];
 
                 parsedValue = JSON.parse(val);
-                quotesObj[key] = parsedValue;
-                quotesObjVals.push(parsedValue);
-                quotesObjKeys.push(key)
+                dataObj[key] = parsedValue;
+                dataObjVals.push(parsedValue);
+                dataObjKeys.push(key)
             });
         }).then(() => {
-            this.setState({savedQuotesArray:quotesObjVals});
+            this.setState({savedData:dataObjVals});
             this.setState({isReady: true});
-            this.setState({savedQuotesIds: quotesObjKeys});
+            this.setState({savedDataIds: dataObjKeys});
         });
     }
 
-    async checkNewQuotes() {
-        let currentQuoteIds = [];
+    async checkNewData() {
+        let currentDataIds = [];
 
         allKeys = await AsyncStorage.getAllKeys();
         
@@ -66,23 +65,22 @@ export default class Likes extends React.Component {
                 let key = store[i][0];
                 let val = store[i][1];
 
-                currentQuoteIds.push(key);
+                currentDataIds.push(key);
             });
         }).then(() => {
-            if(currentQuoteIds.length != this.state.savedQuotesIds.length) {
-                console.log("New Quote detected in storage, REFRESH");
+            if(currentDataIds.length != this.state.savedDataIds.length) {
                 this.setState({isReady: false});
-                this.getSavedQuotes();
+                this.getSavedData();
             }
         });
     }
 
     render() {
-        this.checkNewQuotes();
+        this.checkNewData();
         if(this.state.isReady) {
             return (
                 <View style={styles.container}>
-                    <LikesList savedQuotesArray={this.state.savedQuotesArray}/>
+                    <LikesList savedData={this.state.savedData}/>
                 </View>
             );
         } else {

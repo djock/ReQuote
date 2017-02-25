@@ -17,11 +17,11 @@ export default class LikesList extends React.Component {
         super(props);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
-            dataSource: ds.cloneWithRows(this.props.savedQuotesArray)
+            dataSource: ds.cloneWithRows(this.props.savedData)
         };
     }
     render() {
-        if(this.props.savedQuotesArray.length != 0 && this.props.savedQuotesArray[0].quote != null) {
+        if(this.props.savedData.length != 0 && this.props.savedData[0].text != null) {
             return (
                 <View style={styles.container}>
                     <ListView
@@ -34,7 +34,7 @@ export default class LikesList extends React.Component {
             );
         } else {
             return (
-                <MessageScreen text='Swipe down on a quote to save it'/>
+                <MessageScreen text='No quotes saved'/>
             );
         }
 

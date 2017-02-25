@@ -16,19 +16,14 @@ let swipeoutBtns = [
   }
 ]
 export default class LikesListItem extends React.Component {
-
-    removeQuote(quoteId) {
-
-    }
-
   render() {
-      if(this.props.quote != null) {
+      if(this.props.text != null) {
         return (
             <View 
-            style={styles.container}>
+                style={styles.container}>
                 <View>
-                    <Text style={styles.quote}>{this.props.quote}</Text>
-                    <View style={styles.quoteInfo}>
+                    <Text style={styles.text}>{this.props.text}</Text>
+                    <View style={styles.bottomInfo}>
                         <Text style={styles.author}>{this.props.author}</Text>
                         <Text style={styles.category}>Category: {this.props.category.toUpperCase()}</Text> 
                     </View>
@@ -48,13 +43,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         backgroundColor: Colors.backgroundColor,
     },
-    quoteInfo:{
+    bottomInfo:{
         flex: 1,
         flexDirection: 'row',
         backgroundColor: Colors.backgroundColor,
         paddingTop: 5
     },
-    quote: {
+    text: {
         color: Colors.mainColor,
         fontSize: 18,
         backgroundColor: Colors.backgroundColor,

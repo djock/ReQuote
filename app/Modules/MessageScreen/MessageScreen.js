@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
         fontSize: 24,
         justifyContent: 'center',
         alignItems: 'center',
-        fontWeight: 'bold',
         fontFamily: 'palatino-bold',
         textAlign: 'center',
      }

@@ -9,12 +9,12 @@ import {Foundation} from '@exponent/vector-icons';
 import Colors from '../../Constants/Colors';
 import Layout from '../../Constants/Layout';
 
-export default class Quote extends React.Component {
+export default class Card extends React.Component {
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.card}>
-                    <Text style={styles.quote}>{this.props.quote}</Text>
+                    <Text style={styles.text}>{this.props.text}</Text>
                     <Text style={styles.author}>{this.props.author}</Text>
                     <Text style={styles.category}>{this.props.category.toUpperCase()}</Text> 
                 </View>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    quote: {
+    text: {
         fontSize: 22,
         marginTop: 10,
         textAlign: 'center',

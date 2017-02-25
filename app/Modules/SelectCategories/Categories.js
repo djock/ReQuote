@@ -10,16 +10,16 @@ import {
 } from 'react-native';
 
 import CheckBox from 'react-native-check-box'
-import QuotesBrowser from '../QuotesBrowser/QuotesBrowser';
+import App from '../App/App';
 import Colors from '../../Constants/Colors';
 import Toast, {DURATION} from 'react-native-easy-toast';
 
-const categories = ['art', 'popular', 'courage', 'failure', 'faith', 'fear', 'forgiveness', 
+const AppCategories = ['art', 'popular', 'courage', 'failure', 'faith', 'fear', 'forgiveness', 
                     'friendship', 'funny', 'gratitude', 'hope', 'inspirational', 'knowledge', 'leadership', 'life', 
                     'love', 'music', 'motivational', 'positive', 'strength', 'success', 'wisdom'];
 
-let SavedCategories = [];
-const STORAGE_KEY = 'categories';
+let UserSavedCategories = [];
+const STORAGE_KEY = 'AppCategories';
 
 export default class Categories extends React.Component {
     static route = {
@@ -32,72 +32,105 @@ export default class Categories extends React.Component {
         super(props);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
-            dataSource: ds.cloneWithRows(categories),
-            savedCategories: SavedCategories,
-            isDataChecked: false,
+            dataSource: ds.cloneWithRows(AppCategories),
+            savedCategories: UserSavedCategories,
             isReady: false,
-            hasBeenSaved: false
+            hasBeenSaved: false,
+            areAllChecked: true,
+            hasBeenModified: false
         };
     }
 
     componentWillMount() {
-        this.getSavedCategories();
+        this.getUserSavedCategories();
     }
 
-    async getSavedCategories() {
+    componentDidMount() {
+        this.setState({hasBeenModified: false});
+        console.log("Did mount");
+    }
+
+
+    async getUserSavedCategories() {
         userCategories = await AsyncStorage.getItem(STORAGE_KEY);
 
         let data = JSON.parse(userCategories);
         if(data === null) {
-            SavedCategories = categories;
+            UserSavedCategories = AppCategories;
         } else {
             for( let i = 0; i< data.length; i++) {
-                SavedCategories.push(data[i])
+                UserSavedCategories.push(data[i])
             }
         }
 
-        this.setState({category: SavedCategories});
+        this.setState({category: UserSavedCategories});
         this.setState({isReady: true});
     }
 
-    onSaveCategories() {
-        let categories = JSON.stringify(SavedCategories);
+    onSave() {
+        let AppCategories = JSON.stringify(UserSavedCategories);
         try {
-            AsyncStorage.setItem(STORAGE_KEY, categories);
-            console.log("Update categories", categories);
+            AsyncStorage.setItem(STORAGE_KEY, AppCategories);
         } catch (error) {
             console.log("Error", error)
         }
     }
 
-    onCheckCategory(data) {
+    onCheck(data) {
         let isAlreadySaved = this.isCategorySaved(data)
 
         if(!isAlreadySaved) {
-            SavedCategories.push(data);
+            UserSavedCategories.push(data);
         } else {
-            let index = SavedCategories.indexOf(data);
-            SavedCategories.splice(index, 1);
+            let index = UserSavedCategories.indexOf(data);
+            UserSavedCategories.splice(index, 1);
         }
-        this.setState({savedCategories: SavedCategories});
+        this.setState({savedCategories: UserSavedCategories});
+    }
+
+    onCheckAll(isChecked) {
+        this.setState({isReady: false});
+
+        //hack to refresh view
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.setState({dataSource: ds.cloneWithRows(AppCategories)});
+
+        this.setState({areAllChecked: isChecked});
+        this.setState({hasBeenModified: true});
+        this.setState({isReady: true});
     }
 
     isCategorySaved(data) {
-        if (this.state.savedCategories.indexOf(data) != -1) {
-            return true;
-        } else {
-            return false;
-        }
+        this.state.savedCategories.indexOf(data) != -1 ? true : false;
     }
 
     renderListItem(data) {
-        let isChecked = SavedCategories.indexOf(data) != -1 ? true : false;
+        let isChecked = true;
 
+        // console.log("Modify", this.state.hasBeenModified)
+        if(this.state.hasBeenModified) {
+            isChecked = this.state.areAllChecked ? true : false;
+        } else {
+            isChecked = UserSavedCategories.indexOf(data) != -1 ? true : false;
+        }
         return(
             <CheckBox style={styles.listItem}
-                leftText={data.toUpperCase()}
+                leftText={data.toUpperCase()} 
                 isChecked={isChecked}
-                onClick={() => this.onCheckCategory(data)}
+                onClick={() => this.onCheck(data)}
+            />
+        );
+    }
+
+    renderHeader(data) {
+        let isChecked = this.state.areAllChecked;
+
+        return(
+            <CheckBox style={styles.header}
+                leftText={'Categories'}
+                isChecked={isChecked}
+                leftTextStyle={styles.title}
+                onClick={() => this.onCheckAll(!isChecked)}
             />
         );
     }
@@ -106,7 +139,7 @@ export default class Categories extends React.Component {
         if(this.state.isReady) {
             return (
                 <View style={styles.container}>
-                    <Text style={styles.title}>Choose categories</Text>
+                    {this.renderHeader(this.state.areAllChecked)}
                     <ListView style={styles.listView}
                             dataSource={this.state.dataSource}
                             renderRow={(data) => this.renderListItem(data)} 
@@ -120,7 +153,7 @@ export default class Categories extends React.Component {
                         positionValue={100}
                     />
                     <TouchableOpacity style={styles.saveButton} 
-                        onPress={ () => { this.onSaveCategories(); this.refs.toast.show('Saved!'); }}
+                        onPress={ () => { this.onSave(); this.refs.toast.show('Saved!'); }}
                         activeOpacity ={0.7}
                         >
                         <Text style={styles.saveButtonText}>Save</Text>
@@ -130,7 +163,7 @@ export default class Categories extends React.Component {
             );
         } else if (this.state.hasBeenSaved) {
             return (
-                <QuotesBrowser />
+                <App />
             );
         } else {            
             return (
@@ -153,12 +186,18 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.backgroundColor,
         padding: 5
     },
+    header: {
+        marginTop: 35,
+        marginBottom: 10,
+        paddingLeft: 20,
+        paddingRight: 20,
+    },
     title: {
         fontSize: 20,
         alignSelf: 'center',
         fontFamily: 'palatino-bold',
-        marginTop: 20,
-        marginBottom: 10
+        // marginTop: 20,
+        // marginBottom: 10
     },
     separator: {
         flex: 1,
